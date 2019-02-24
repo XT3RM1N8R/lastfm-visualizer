@@ -47,7 +47,7 @@ function getUserFriends(username, callback) {
     callback);
 }
 
-function getChartTopArtists() {
+function getChartTopArtists(artistNumber) {
   let callback = function(data) {
     let artistList = data.artists.artist;
     let json_data = [];
@@ -58,20 +58,51 @@ function getChartTopArtists() {
     }
     $('#success #test').html(JSON.stringify(json_data, null, 2));
   };
+  let MAX_PER_PAGE = 100; // The API returns erratic results after 119 artists per page
+  if (artistNumber > MAX_PER_PAGE) {
+    artistNumber = MAX_PER_PAGE;
+  }
   quickRequestLastfm(
     {
       method: 'chart.getTopArtists',
-      page: '1', // Page offset
-      limit: '100' // Results per page
+      page: '1', // Page selection
+      limit: artistNumber // Results per page
     },
     callback);
 }
 
-
+var track_scrobbles = [];
+function getUserRecentTracks(username) {
+  let callback = function(data) {
+    let trackList = data.recenttracks.track;
+    let track_data = [];
+    for (let track in trackList) {
+      if (!trackList[track].date) {
+        continue;
+      }
+      track_data.push({
+        name: trackList[track].name,
+        album: trackList[track].album['#text'],
+        artist: trackList[track].artist['#text'],
+        time: trackList[track].date.uts
+      });
+    }
+    track_scrobbles = track_data;
+    $('#success #test').html(JSON.stringify(track_data, null, 2));
+  };
+  quickRequestLastfm(
+    {
+      method: 'user.getRecentTracks',
+      limit: 200, // Max limit
+      user: username,
+      page: '1' // Page selection
+    },
+    callback);
+}
 
 function testRequest() {
   let callback = function(data) {
       $('#success #test').html(JSON.stringify(data, null, 2));
     };
-  getChartTopArtists();
+  getUserRecentTracks($('#textInput').val());
 }
