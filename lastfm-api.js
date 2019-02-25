@@ -88,7 +88,10 @@ function getUserRecentTracks(username) {
       });
     }
     track_scrobbles = track_data;
-    $('#success #test').html(JSON.stringify(track_data, null, 2));
+    //$('#result').html(JSON.stringify(track_data, null, 2));
+    AggregateTrackData(track_scrobbles);
+    BuildUserListenGraph(aggregatedTrackData);
+    StackedAreaChartExample();
   };
   quickRequestLastfm(
     {
@@ -100,9 +103,34 @@ function getUserRecentTracks(username) {
     callback);
 }
 
+var aggregatedTrackData = [];
+function AggregateTrackData(trackArray) {
+  trackArray.forEach(function(element) {
+    var tempTime = new Date(element.time * 1000);
+    element.time = +d3.time.hour.floor(tempTime);
+    console.log(element.time);
+  });
+  aggregatedTrackData = d3.nest()
+    .key(function(d) {return d.artist;})
+    .key(function(d) {
+      console.log('the time: ' + d.time);
+      return d.time;})
+    .rollup(function(d) {return d.length;})
+    .entries(trackArray);
+  console.log('Entry here: ' + aggregatedTrackData);
+  console.log(JSON.stringify(aggregatedTrackData, null, 2));
+  aggregatedTrackData.forEach(function(element) {
+    element.values = element.values.map(function(item) {
+        return Object.values(item);
+    });
+  });
+  console.log(aggregatedTrackData);
+  console.log(JSON.stringify(aggregatedTrackData, null, 2));
+}
+
 function testRequest() {
   let callback = function(data) {
-      $('#success #test').html(JSON.stringify(data, null, 2));
+      $('#result').html(JSON.stringify(data, null, 2));
     };
   getUserRecentTracks($('#textInput').val());
 }
