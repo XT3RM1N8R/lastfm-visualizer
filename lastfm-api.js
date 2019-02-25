@@ -21,7 +21,7 @@ function quickRequest(type, url, headers, data, dataType, callback) {
 
 function quickRequestLastfm(data, callback) {
   let type = 'GET';
-  let url = 'http://ws.audioscrobbler.com/2.0/';
+  let url = 'https://ws.audioscrobbler.com/2.0/';
   let headers = {};
   data.format = 'json';
   data.api_key = API_KEY;
