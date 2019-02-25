@@ -4,7 +4,7 @@ A data visualizer for Last.fm
 ## Video
 
 ## Link
-
+https://xt3rm1n8r.github.io/lastfm-visualizer/
 ## Data
 Data was taken from the Last.fm database using the Last.fm API. Data had to be filtered, formatted, aggregated, etc. in order to be usable.
 
