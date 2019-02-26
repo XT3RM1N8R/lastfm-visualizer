@@ -107,10 +107,8 @@ function StackedAreaChartExample(data, xAccess, yAccess) {
   nv.addGraph(function() {
     chart = nv.models.stackedAreaChart()
       .useInteractiveGuideline(true)
-      .x(function(d) {
-        return d[0]})
-      .y(function(d) {
-        return d[1];})
+      .x(function(d) { return d[0] })
+      .y(function(d) { return d[1] })
       .controlLabels({stacked: "Stacked"})
       .duration(300);
     chart.xAxis.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
