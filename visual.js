@@ -108,10 +108,8 @@ function StackedAreaChartExample(data, xAccess, yAccess) {
     chart = nv.models.stackedAreaChart()
       .useInteractiveGuideline(true)
       .x(function(d) {
-        //console.log(d);
-        return parseInt(d[0])})
+        return d[0]})
       .y(function(d) {
-        //console.log(d);
         return d[1];})
       .controlLabels({stacked: "Stacked"})
       .duration(300);
@@ -119,7 +117,7 @@ function StackedAreaChartExample(data, xAccess, yAccess) {
     chart.yAxis.tickFormat(d3.format(',.4f'));
     chart.legend.vers('furious');
     d3.select('#chart1')
-      .datum(histcatexplong)
+      .datum(data)
       .transition().duration(1000)
       .call(chart)
       .each('start', function() {
