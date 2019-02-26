@@ -111,7 +111,7 @@ function StackedAreaChartExample(data, xAccess, yAccess) {
       .y(function(d) { return d[1] })
       .controlLabels({stacked: "Stacked"})
       .duration(300);
-    chart.xAxis.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
+    chart.xAxis.tickFormat(function(d) { return d3.time.format('%A %H')(new Date(d)) });
     chart.yAxis.tickFormat(d3.format(',.4f'));
     chart.legend.vers('furious');
     d3.select('#chart1')

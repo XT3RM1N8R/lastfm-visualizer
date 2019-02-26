@@ -114,7 +114,7 @@ var aggregatedTrackData = [];
 function AggregateTrackData(trackArray) { // It's important to note that scrobbles are sorted in order of descending time
   trackArray.forEach(function(element) {    // Round the recorded times down to a certain timestep
     var tempTime = new Date(element.time * 1000); // Create a date from the UNIX time in seconds; must multiply by 1000 for milliseconds
-    element.time = +d3.time.day.floor(tempTime); // Round down to the nearest hour
+    element.time = +d3.time.hour.floor(tempTime); // Round down to the nearest hour
   });
   var minTime = trackArray[trackArray.length-1].time;
   var maxTime = trackArray[0].time;
@@ -136,7 +136,7 @@ function AggregateTrackData(trackArray) { // It's important to note that scrobbl
   var i, tmpTimePoint;
   console.log(aggregatedTrackData);
   aggregatedTrackData.forEach((function(element) {                                                    // For each artist
-    for (i = 0, tmpTimePoint = maxTime; tmpTimePoint >= minTime; i++, tmpTimePoint -= msTime.day) {  // step through the list of scrobbles and fill in zero data for the missing times
+    for (i = 0, tmpTimePoint = maxTime; tmpTimePoint >= minTime; i++, tmpTimePoint -= msTime.hour) {  // step through the list of scrobbles and fill in zero data for the missing times
       if (element.values.length === i) {          // If there are no more time entries before the current tmpTimePoint, we have reached the end of the array,
         element.values.push([tmpTimePoint, 0]);   // so just add more entries at the end of the array
       } else if (element.values[i][0] < tmpTimePoint) { // If the scrobble time is before the current tmpTimePoint,
