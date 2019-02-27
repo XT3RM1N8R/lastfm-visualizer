@@ -54,7 +54,13 @@ function StackedAreaChartExample(data, xAccess, yAccess) {
       .y(function(d) { return d[1] })
       .controlLabels({stacked: "Stacked"})
       .duration(300);
-    chart.xAxis.tickFormat(function(d) { return d3.time.format('%A %H')(new Date(d)) });
+    chart.xAxis.tickFormat(function(d,i) {
+      if (i % 2 === 0) {
+        return "";
+      } else {
+        return d3.time.format('%d/%m-%H:00')(new Date(d))
+      }
+    });
     chart.yAxis.tickFormat(d3.format(',d'));
     chart.legend.vers('furious');
     d3.select('#chart1')
@@ -70,10 +76,12 @@ function StackedAreaChartExample(data, xAccess, yAccess) {
         }, 0)
       });
     nv.utils.windowResize(chart.update);
+    graph = chart; // Save the chart so we can work with it later
     return chart;
   });
 }
 
+var graph;
 function BuildUserListenGraph(data) {
   let xAccess = function(d) {
     return d.key;
