@@ -95,9 +95,7 @@ function getUserRecentTracks(username) {
       });
     }
     track_scrobbles = track_data;
-    //$('#result').html(JSON.stringify(track_data, null, 2));
-    AggregateTrackData(track_scrobbles);
-    BuildUserListenGraph(aggregatedTrackData);
+    PostRequestFollowUp();
   };
   quickRequestLastfm(
     {
@@ -162,4 +160,9 @@ function testRequest() {
       $('#result').html(JSON.stringify(data, null, 2));
     };
   getUserRecentTracks($('#textInput').val());
+}
+
+function PostRequestFollowUp() {
+  AggregateTrackData(track_scrobbles);
+  BuildUserListenGraph(aggregatedTrackData);
 }
