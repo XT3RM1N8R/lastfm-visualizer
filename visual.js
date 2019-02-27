@@ -58,7 +58,7 @@ function StackedAreaChartExample(data, xAccess, yAccess) {
       if (i % 2 === 0) {
         return "";
       } else {
-        return d3.time.format('%d/%m-%H:00')(new Date(d))
+        return d3.time.format('%m/%d-%H:00')(new Date(d))
       }
     });
     chart.yAxis.tickFormat(d3.format(',d'));
