@@ -134,6 +134,9 @@ function AggregateTrackData(trackArray) { // It's important to note that scrobbl
         return Object.values(item);
     });
   });
+  
+  // At this point, it's important to note that the scrobble times are sorted in order of descending time,
+  // so the latest entries will be at the beginning of the array(s) and the earliest entries will be at the end
   var i, tmpTimePoint;
   aggregatedTrackData.forEach((function(element) {                                                    // For each artist
     for (i = 0, tmpTimePoint = maxTime; tmpTimePoint >= minTime; i++, tmpTimePoint -= msTime.hour) {  // step through the list of scrobbles and fill in zero data for the missing times
