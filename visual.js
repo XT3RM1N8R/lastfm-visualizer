@@ -3,7 +3,7 @@ function StackedAreaChartExample(data, xAccess, yAccess) {
   var chart;
   nv.addGraph(function() {
     chart = nv.models.stackedAreaChart()
-      .useInteractiveGuideline(true)
+      //.useInteractiveGuideline(true)
       .x(function(d) { return d[0] })
       .y(function(d) { return d[1] })
       .controlLabels({stacked: "Stacked"})
