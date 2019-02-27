@@ -98,7 +98,6 @@ function getUserRecentTracks(username) {
     //$('#result').html(JSON.stringify(track_data, null, 2));
     AggregateTrackData(track_scrobbles);
     BuildUserListenGraph(aggregatedTrackData);
-    StackedAreaChartExample();
   };
   quickRequestLastfm(
     {
