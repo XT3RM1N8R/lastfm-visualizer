@@ -127,6 +127,7 @@ function AggregateTrackData(trackArray) { // It's important to note that scrobbl
         return Object.values(item);
     });
   });
+  aggregatedTrackData.sort(function(a, b) {return b.values.length - a.values.length});
   var i, tmpTimePoint;
   aggregatedTrackData.forEach((function(element) {                                                    // For each artist
     for (i = 0, tmpTimePoint = maxTime; tmpTimePoint >= minTime; i++, tmpTimePoint -= msTime.hour) {  // step through the list of scrobbles and fill in zero data for the missing times
