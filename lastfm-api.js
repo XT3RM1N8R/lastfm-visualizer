@@ -156,6 +156,8 @@ function AggregateTrackData(trackArray) { // It's important to note that scrobbl
 }
 
 function testRequest() {
+  d3.selectAll('#chart1 > *').remove();
+  d3.selectAll(".nvtooltip").remove();
   let callback = function(data) {
       $('#result').html(JSON.stringify(data, null, 2));
     };
