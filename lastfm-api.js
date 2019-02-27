@@ -153,9 +153,23 @@ function AggregateTrackData(trackArray) { // It's important to note that scrobbl
   }));
 }
 
+var myChart;
 function testRequest() {
   d3.selectAll('#chart1 > *').remove();
   d3.selectAll(".nvtooltip").remove();
+  
+  myChart = {svg: d3.select('#chart1')};
+  myChart.width = parseInt(myChart.svg.style("width"));
+  myChart.height = parseInt(myChart.svg.style("height"));
+  myChart.svg.append("text")
+    .attr("x", myChart.width / 2)
+    .attr("y", myChart.height / 2)
+    .attr("text-anchor", "middle")
+    .style("font", "sans-serif")
+    .style("font-size", function() {
+      return Math.min(myChart.width, myChart.height) / 10;
+    })
+    .text("Loading...");
   let callback = function(data) {
       $('#result').html(JSON.stringify(data, null, 2));
     };
@@ -165,4 +179,5 @@ function testRequest() {
 function PostRequestFollowUp() {
   AggregateTrackData(track_scrobbles);
   BuildUserListenGraph(aggregatedTrackData);
+  d3.select('#chart1').selectAll("text").remove();
 }
