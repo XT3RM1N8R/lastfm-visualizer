@@ -117,23 +117,17 @@ function AggregateTrackData(trackArray) { // It's important to note that scrobbl
   });
   var minTime = trackArray[trackArray.length-1].time;
   var maxTime = trackArray[0].time;
-  console.log('Floored Times by Hour: ' + JSON.stringify(trackArray, null, 2));
   aggregatedTrackData = d3.nest()           // Aggregate the data
     .key(function(d) {return d.artist;})    // Sort by artist
-    .key(function(d) {                      // Sort by time
-      //console.log('the time: ' + d.time);
-      return d.time;})
+    .key(function(d) {return d.time;})      // Sort by time
     .rollup(function(d) {return d.length;}) // Count the number of scrobbles for this time and replace scrobble entries with this count
     .entries(trackArray);
-  //console.log('Entry here: ' + aggregatedTrackData[0].values[0].key);
-  //console.log(JSON.stringify(aggregatedTrackData, null, 2));
   aggregatedTrackData.forEach(function(element) {        // For each artist
     element.values = element.values.map(function(item) { // replace the set of properties with an array of their corresponding values
         return Object.values(item);
     });
   });
   var i, tmpTimePoint;
-  console.log(aggregatedTrackData);
   aggregatedTrackData.forEach((function(element) {                                                    // For each artist
     for (i = 0, tmpTimePoint = maxTime; tmpTimePoint >= minTime; i++, tmpTimePoint -= msTime.hour) {  // step through the list of scrobbles and fill in zero data for the missing times
       if (element.values.length === i) {          // If there are no more time entries before the current tmpTimePoint, we have reached the end of the array,
@@ -149,8 +143,6 @@ function AggregateTrackData(trackArray) { // It's important to note that scrobbl
       }
     }
   }));
-  console.log(aggregatedTrackData);
-  console.log(JSON.stringify(aggregatedTrackData, null, 2));
 }
 
 function testRequest() {
