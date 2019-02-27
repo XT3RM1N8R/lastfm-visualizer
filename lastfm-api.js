@@ -117,17 +117,23 @@ function AggregateTrackData(trackArray) { // It's important to note that scrobbl
   });
   var minTime = trackArray[trackArray.length-1].time;
   var maxTime = trackArray[0].time;
+  
   aggregatedTrackData = d3.nest()           // Aggregate the data
     .key(function(d) {return d.artist;})    // Sort by artist
     .key(function(d) {return d.time;})      // Sort by time
     .rollup(function(d) {return d.length;}) // Count the number of scrobbles for this time and replace scrobble entries with this count
     .entries(trackArray);
+  
+  aggregatedTrackData.sort(function(a, b) {return b.values.length - a.values.length}); // Sort the artist series by number of entries they have (descending)
+  if (aggregatedTrackData.length > 20) {                    // If the number of series is greater than 20,      *Note: We do this because of the color limit (d3.scale.category20()) and
+    aggregatedTrackData = aggregatedTrackData.slice(0,20);  // take the top 20 series and trash the rest ;)            the performance limitations; 20 is a lot and it's laggy after that
+  }
+  
   aggregatedTrackData.forEach(function(element) {        // For each artist
     element.values = element.values.map(function(item) { // replace the set of properties with an array of their corresponding values
         return Object.values(item);
     });
   });
-  aggregatedTrackData.sort(function(a, b) {return b.values.length - a.values.length});
   var i, tmpTimePoint;
   aggregatedTrackData.forEach((function(element) {                                                    // For each artist
     for (i = 0, tmpTimePoint = maxTime; tmpTimePoint >= minTime; i++, tmpTimePoint -= msTime.hour) {  // step through the list of scrobbles and fill in zero data for the missing times
