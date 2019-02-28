@@ -15,7 +15,9 @@ function StackedAreaChartExample(data, xAccess, yAccess) {
         return d3.time.format('%m/%d-%H:00')(new Date(d))
       }
     });
+    chart.xAxis.axisLabel("Time");
     chart.yAxis.tickFormat(d3.format(',d'));
+    chart.yAxis.axisLabel("Scrobbles");
     chart.legend.vers('furious');
     d3.select('#chart1')
       .datum(data)
