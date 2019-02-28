@@ -2,7 +2,7 @@
 A data visualizer for Last.fm
 
 ## Video
-
+https://github.com/XT3RM1N8R/lastfm-visualizer/raw/master/Project_1_Demo_Video.mkv
 ## Link
 https://xt3rm1n8r.github.io/lastfm-visualizer/
 ## Data
