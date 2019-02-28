@@ -15,15 +15,16 @@ In order to use the filtered information, I had to aggregate it into useful cate
 Additionally, I had to select the most significant information from this data due to crowding on the graph and I had to have it preformatted before processing it with the visualization libraries due to some issues I later discovered with data formatting compatibility.
 
 ## Findings
+
+#### Hourly Listening Patterns
 I had initially aimed to establish a way to visualize how a certain user would listen to different artists over time, but I an unintended result was that the visualization could also be used to observe the music listening patterns over shorter intervals of time, such as hourly listening patterns.
 
-Hourly Listening Patterns
+![Hourly Listening Patterns](Screenshots/Hourly_Listening_Patterns.png)
+----------------
+#### Too Many Artist Layers
+At first, I started by displaying all of the artist data. Unfortunately, some people can listen to a large number of artists, which resulted in a crowded graph and poor performance, as well as a lack of sufficient color-coding. This is how I ended up selecting the most significant categories. I will continue to consider improvements to this issue, such as further clustering the smaller artist categories into larger groups of data.
 
-At first, I started by displaying all of the artist data. Unfortunately, some people can listen to a large number of artists, which resulted in a crowded graph and poor performance, as well as a lack of sufficient color-coding.
-
-Too Many Artists
-
-
+![Too Many Layers](Screenshots/Too_Many_Layers.png)
 
 
 ## Important
