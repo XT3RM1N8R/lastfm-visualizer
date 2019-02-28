@@ -25,7 +25,15 @@
 </head>
 <body class='with-3d-shadow with-transitions'>
 <div id="mainDiv">
-  <input type="text" id="textInput" value="xt3rm1n8r">Username Input</input>
+  <label>Select or Input a username:
+    <input list="usernames" id="usernameInput" value="xt3rm1n8r"/></label>
+  <datalist id="usernames">
+    <option value="xt3rm1n8r">
+    <option value="midk">
+    <option value="liurui39660">
+    <option value="patteroast">
+    <option value="whizzer0">
+  </datalist>
   <button id="runButton" onclick="testRequest()">Run</button>
 </div>
 <svg id="chart1"></svg>

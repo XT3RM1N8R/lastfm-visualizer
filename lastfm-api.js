@@ -173,7 +173,7 @@ function testRequest() {
   let callback = function(data) {
       $('#result').html(JSON.stringify(data, null, 2));
     };
-  getUserRecentTracks($('#textInput').val());
+  getUserRecentTracks($('#usernameInput').val());
 }
 
 function PostRequestFollowUp() {
